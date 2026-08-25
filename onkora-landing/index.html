@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="meta.title">Onkora — Orchestration omnicanale en oncologie</title>
+<meta name="description" data-i18n-content="meta.desc" content="Onkora orchestre les campagnes HCP en oncologie sur tous les canaux — email, rep-triggered, congrès, web et MSL — depuis un seul plan de séquence, avec piste d'audit complète.">
+<meta name="theme-color" content="#F3F5F2">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Onkora">
+<meta property="og:title" data-i18n-content="meta.title" content="Onkora — Orchestration omnicanale en oncologie">
+<meta property="og:description" data-i18n-content="meta.desc" content="Onkora orchestre les campagnes HCP en oncologie sur tous les canaux — email, rep-triggered, congrès, web et MSL — depuis un seul plan de séquence, avec piste d'audit complète.">
+<meta property="og:image" content="assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" data-i18n-content="meta.title" content="Onkora — Orchestration omnicanale en oncologie">
+<meta name="twitter:description" data-i18n-content="meta.desc" content="Onkora orchestre les campagnes HCP en oncologie sur tous les canaux.">
+<meta name="twitter:image" content="assets/og.png">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23131C19'/%3E%3Cpath d='M8 10h16M8 16h16M8 22h16' stroke='%231E6F5C' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='10' r='3' fill='%23F3F5F2'/%3E%3Ccircle cx='20' cy='16' r='3' fill='%23F3F5F2'/%3E%3Ccircle cx='16' cy='22' r='3' fill='%238C2F39'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main" data-i18n="skip">Aller au contenu principal</a>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="top" data-header>
+  <div class="shell header-inner">
+
+    <a class="brand" href="#top" data-i18n-aria="brand.aria" aria-label="Onkora — retour en haut de page">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <rect width="32" height="32" rx="4" fill="currentColor"/>
+        <path d="M8 10h16M8 16h16M8 22h16" stroke="var(--teal)" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="12" cy="10" r="3" fill="var(--paper)"/>
+        <circle cx="20" cy="16" r="3" fill="var(--paper)"/>
+        <circle cx="16" cy="22" r="3" fill="var(--red)"/>
+      </svg>
+      <span class="brand-name">Onkora</span>
+    </a>
+
+    <nav class="nav-panel" id="nav-panel" aria-label="Navigation principale" data-i18n-aria="nav.aria">
+      <ul class="nav-list">
+        <li><a href="#problem"  data-i18n="nav.problem">Enjeux</a></li>
+        <li><a href="#platform" data-i18n="nav.platform">Plateforme</a></li>
+        <li><a href="#how"      data-i18n="nav.how">Méthode</a></li>
+        <li><a href="#proof"    data-i18n="nav.proof">Résultats</a></li>
+        <li><a href="#faq"      data-i18n="nav.faq">FAQ</a></li>
+      </ul>
+      <a class="btn btn-primary nav-cta" href="#demo" data-i18n="nav.demo">Demander une démo</a>
+    </nav>
+
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Choix de la langue" data-i18n-aria="lang.aria">
+        <button type="button" class="lang-btn is-active" data-lang="fr" aria-pressed="true">FR</button>
+        <span class="lang-sep" aria-hidden="true"></span>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+
+      <a class="btn btn-primary btn-sm header-cta" href="#demo" data-i18n="nav.demo">Demander une démo</a>
+
+      <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="nav-panel"
+              aria-label="Ouvrir le menu" data-i18n-aria="menu.open">
+        <span class="burger-bar" aria-hidden="true"></span>
+        <span class="burger-bar" aria-hidden="true"></span>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<div class="nav-scrim" id="nav-scrim" hidden></div>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="shell hero-grid">
+
+      <div class="hero-copy">
+        <p class="eyebrow hero-anim" data-anim="1" data-i18n="hero.eyebrow">Orchestration omnicanale — Oncologie</p>
+        <h1 id="hero-title" class="hero-title hero-anim" data-anim="2">
+          <span data-i18n="hero.h1a">La bonne information au bon oncologue,</span>
+          <em data-i18n="hero.h1b">au bon moment.</em>
+        </h1>
+        <p class="hero-sub hero-anim" data-anim="3" data-i18n="hero.sub">Onkora réunit email, rep-triggered, congrès, web et MSL dans un seul plan de séquence piloté — avec la piste d'audit qu'exige un environnement réglementé.</p>
+        <div class="hero-actions hero-anim" data-anim="4">
+          <a class="btn btn-primary" href="#demo" data-i18n="hero.cta1">Demander une démo</a>
+          <a class="btn btn-ghost" href="#platform" data-i18n="hero.cta2">Explorer la plateforme</a>
+        </div>
+        <ul class="hero-meta hero-anim" data-anim="5">
+          <li data-i18n="hero.meta1">Hébergement UE</li>
+          <li data-i18n="hero.meta2">MLR intégré</li>
+          <li data-i18n="hero.meta3">Piste d'audit complète</li>
+        </ul>
+      </div>
+
+      <figure class="diagram-frame hero-anim" data-anim="4">
+        <svg class="diagram" viewBox="-58 4 698 330" role="img"
+             aria-label="Schéma d'orchestration : cinq canaux convergent vers un point de contrôle de validation, puis vers un point de contact oncologue unique."
+             data-i18n-aria="dia.aria">
+
+          <!-- graduation temporelle -->
+          <g class="dia-axis" aria-hidden="true">
+            <text class="dia-tick" x="140" y="30" data-i18n="dia.t1">J1</text>
+            <text class="dia-tick" x="208" y="30" data-i18n="dia.t2">J8</text>
+            <text class="dia-tick" x="276" y="30" data-i18n="dia.t3">J15</text>
+            <text class="dia-tick" x="344" y="30" data-i18n="dia.t4">J21</text>
+            <path d="M140 38v8M208 38v8M276 38v8M344 38v8"/>
+            <path class="dia-guide" d="M140 54v260M208 54v260M276 54v260M344 54v260"/>
+          </g>
+
+          <!-- couloirs -->
+          <g class="dia-lanes" aria-hidden="true">
+            <text class="dia-label" x="92" y="76"  data-i18n="dia.email">Email</text>
+            <text class="dia-label" x="92" y="132" data-i18n="dia.rep">Rep-triggered</text>
+            <text class="dia-label" x="92" y="188" data-i18n="dia.congress">Congrès</text>
+            <text class="dia-label" x="92" y="244" data-i18n="dia.web">Web</text>
+            <text class="dia-label" x="92" y="300" data-i18n="dia.msl">MSL</text>
+            <path class="dia-lane" d="M104 72h268M104 128h268M104 184h268M104 240h268M104 296h268"/>
+          </g>
+
+          <!-- convergence -->
+          <g class="dia-converge" aria-hidden="true">
+            <path d="M372 72C404 72 400 184 430 184"/>
+            <path d="M372 128C404 128 400 184 430 184"/>
+            <path d="M372 184h58"/>
+            <path d="M372 240C404 240 400 184 430 184"/>
+            <path d="M372 296C404 296 400 184 430 184"/>
+          </g>
+
+          <!-- impulsions canal -->
+          <g class="dia-pulses" aria-hidden="true">
+            <circle class="pulse" style="--d:0s"    cx="104" cy="72"  r="4.5"/>
+            <circle class="pulse" style="--d:.9s"   cx="104" cy="128" r="4.5"/>
+            <circle class="pulse" style="--d:1.8s"  cx="104" cy="184" r="4.5"/>
+            <circle class="pulse" style="--d:2.7s"  cx="104" cy="240" r="4.5"/>
+            <circle class="pulse" style="--d:3.6s"  cx="104" cy="296" r="4.5"/>
+          </g>
+
+          <!-- point de contrôle (validation / traçabilité) -->
+          <g class="dia-gate" aria-hidden="true">
+            <path class="gate-box" d="M438 162h28l8 8v28l-8 8h-28l-8-8v-28z"/>
+            <path class="gate-check" d="M443 184l6 6 12-13"/>
+            <text class="dia-gatelabel" x="452" y="224" data-i18n="dia.gate">Validation</text>
+          </g>
+
+          <!-- sortie vers HCP -->
+          <g class="dia-out" aria-hidden="true">
+            <path class="dia-outline" d="M474 184h80"/>
+            <circle class="out-pulse" cx="474" cy="184" r="4.5"/>
+            <circle class="dia-node" cx="580" cy="184" r="22"/>
+            <text class="dia-nodelabel" x="580" y="189">HCP</text>
+          </g>
+        </svg>
+        <figcaption class="diagram-caption" data-i18n="dia.caption">Un cycle de séquence, cinq canaux, un seul point de validation.</figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ============ PROBLÈME ============ -->
+  <section class="section section-alt" id="problem" aria-labelledby="problem-title">
+    <div class="shell">
+      <p class="eyebrow reveal" data-i18n="prob.kicker">Enjeux</p>
+      <h2 class="section-title reveal" id="problem-title" data-i18n="prob.title">Trois frictions coûtent leur portée aux campagnes oncologie.</h2>
+      <p class="section-lead reveal" data-i18n="prob.lead">Les équipes marque et médicales travaillent sur les mêmes oncologues, sans partager ni le plan, ni le calendrier, ni la mesure.</p>
+
+      <ol class="prob-list">
+        <li class="prob-item reveal">
+          <span class="prob-num" aria-hidden="true">01</span>
+          <h3 data-i18n="prob.1t">Des canaux silotés</h3>
+          <p data-i18n="prob.1d">L'email part du marketing, la visite du terrain, le congrès des affaires médicales. Personne ne voit la séquence complète reçue par l'oncologue — ni la répétition qu'elle produit.</p>
+        </li>
+        <li class="prob-item reveal">
+          <span class="prob-num" aria-hidden="true">02</span>
+          <h3 data-i18n="prob.2t">Un ciblage approximatif</h3>
+          <p data-i18n="prob.2d">Les segments reposent sur le potentiel de prescription, rarement sur le comportement réel : sujets consultés, sessions suivies, questions posées au MSL.</p>
+        </li>
+        <li class="prob-item reveal">
+          <span class="prob-num" aria-hidden="true">03</span>
+          <h3 data-i18n="prob.3t">Une validation lente</h3>
+          <p data-i18n="prob.3d">Chaque adaptation locale repasse en revue MLR complète. Le délai de validation dicte le calendrier de campagne, au lieu de l'inverse.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ PLATEFORME ============ -->
+  <section class="section" id="platform" aria-labelledby="platform-title">
+    <div class="shell">
+      <p class="eyebrow reveal" data-i18n="feat.kicker">Plateforme</p>
+      <h2 class="section-title reveal" id="platform-title" data-i18n="feat.title">Un plan de séquence unique, du ciblage à la piste d'audit.</h2>
+      <p class="section-lead reveal" data-i18n="feat.lead">Six modules, une seule source de vérité sur ce que chaque oncologue a reçu, sur quel canal, et avec quelle version validée du contenu.</p>
+
+      <div class="feat-grid">
+        <article class="feat-card reveal">
+          <span class="feat-idx" aria-hidden="true">01</span>
+          <h3 data-i18n="feat.1t">Orchestration multicanale</h3>
+          <p data-i18n="feat.1d">Un plan unique qui séquence email, rep-triggered, congrès, web et MSL. Les règles de pression et d'exclusion s'appliquent à tous les canaux, pas à chacun séparément.</p>
+        </article>
+        <article class="feat-card reveal">
+          <span class="feat-idx" aria-hidden="true">02</span>
+          <h3 data-i18n="feat.2t">Segmentation HCP</h3>
+          <p data-i18n="feat.2d">Des cohortes construites sur le comportement observé — spécialité, ligne de traitement suivie, engagement réel — et non sur le seul décile de prescription.</p>
+        </article>
+        <article class="feat-card reveal">
+          <span class="feat-idx" aria-hidden="true">03</span>
+          <h3 data-i18n="feat.3t">Next-best-action</h3>
+          <p data-i18n="feat.3d">Pour chaque oncologue, le canal et le contenu suivants les plus pertinents, restitués au délégué et au MSL dans leur outil, avec la raison de la recommandation.</p>
+        </article>
+        <article class="feat-card reveal">
+          <span class="feat-idx" aria-hidden="true">04</span>
+          <h3 data-i18n="feat.4t">Bibliothèque validée (MLR)</h3>
+          <p data-i18n="feat.4d">Modules de contenu pré-approuvés, versionnés, avec date d'expiration et périmètre d'usage. Un asset périmé ne peut pas entrer dans une séquence active.</p>
+        </article>
+        <article class="feat-card reveal">
+          <span class="feat-idx" aria-hidden="true">05</span>
+          <h3 data-i18n="feat.5t">Analytics de campagne</h3>
+          <p data-i18n="feat.5d">La lecture se fait par oncologue et par cohorte sur la durée du cycle, pas en taux d'ouverture isolés. Les canaux se comparent sur la même base.</p>
+        </article>
+        <article class="feat-card reveal">
+          <span class="feat-idx" aria-hidden="true">06</span>
+          <h3 data-i18n="feat.6t">Conformité & traçabilité</h3>
+          <p data-i18n="feat.6d">Chaque envoi, chaque approbation et chaque modification de règle sont horodatés et attribués. La piste d'audit s'exporte telle quelle pour inspection.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MÉTHODE ============ -->
+  <section class="section section-alt" id="how" aria-labelledby="how-title">
+    <div class="shell">
+      <p class="eyebrow reveal" data-i18n="how.kicker">Méthode</p>
+      <h2 class="section-title reveal" id="how-title" data-i18n="how.title">Trois étapes, dans cet ordre.</h2>
+
+      <ol class="how-steps">
+        <li class="how-step reveal">
+          <span class="how-num" aria-hidden="true">1</span>
+          <div>
+            <h3 data-i18n="how.1t">Connecter les sources</h3>
+            <p data-i18n="how.1d">Référentiel HCP, CRM terrain, plateforme email, inscriptions congrès et comptes rendus MSL sont réconciliés sur un identifiant unique par praticien.</p>
+          </div>
+        </li>
+        <li class="how-step reveal">
+          <span class="how-num" aria-hidden="true">2</span>
+          <div>
+            <h3 data-i18n="how.2t">Séquencer le cycle</h3>
+            <p data-i18n="how.2d">Vous définissez les cohortes, les règles de pression et les contenus validés autorisés. Onkora produit le plan par canal et signale les conflits avant lancement.</p>
+          </div>
+        </li>
+        <li class="how-step reveal">
+          <span class="how-num" aria-hidden="true">3</span>
+          <div>
+            <h3 data-i18n="how.3t">Mesurer et ajuster</h3>
+            <p data-i18n="how.3d">Le cycle suivant part des résultats du précédent : couverture atteinte, canaux saturés, cohortes sans contact. Les arbitrages restent documentés.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ PREUVE ============ -->
+  <section class="section" id="proof" aria-labelledby="proof-title">
+    <div class="shell">
+      <p class="eyebrow reveal" data-i18n="proof.kicker">Résultats</p>
+      <h2 class="section-title reveal" id="proof-title" data-i18n="proof.title">Ce que change un plan de séquence unifié.</h2>
+
+      <dl class="metrics reveal">
+        <div class="metric">
+          <dt class="metric-val"><span class="counter" data-count="42" data-suffix="%" data-prefix="+">+42%</span></dt>
+          <dd class="metric-label" data-i18n="proof.m1">Engagement HCP qualifié sur un cycle de 12 semaines</dd>
+        </div>
+        <div class="metric">
+          <dt class="metric-val"><span class="counter" data-count="3.1" data-decimals="1" data-suffix="×">3,1×</span></dt>
+          <dd class="metric-label" data-i18n="proof.m2">Accélération du délai de validation MLR</dd>
+        </div>
+        <div class="metric">
+          <dt class="metric-val"><span class="counter" data-count="68" data-suffix="%">68%</span></dt>
+          <dd class="metric-label" data-i18n="proof.m3">Couverture des cibles prioritaires, tous canaux confondus</dd>
+        </div>
+        <div class="metric">
+          <dt class="metric-val"><span class="counter" data-count="12" data-suffix="j" data-suffix-en="d">12j</span></dt>
+          <dd class="metric-label" data-i18n="proof.m4">Gagnés sur la préparation de chaque cycle de campagne</dd>
+        </div>
+      </dl>
+
+      <figure class="quote reveal">
+        <blockquote><p data-i18n="proof.quote">Nous avons cessé d'arbitrer entre le terrain et le digital. Le plan de séquence est devenu la conversation commune entre la marque et les affaires médicales — et la piste d'audit a supprimé la moitié de nos allers-retours de validation.</p></blockquote>
+        <figcaption>
+          <span class="quote-name" data-i18n="proof.author">Hélène Vasseur</span>
+          <span class="quote-role" data-i18n="proof.role">Global Omnichannel Lead, franchise Oncologie</span>
+        </figcaption>
+      </figure>
+      <p class="disclaimer reveal" data-i18n="proof.disclaimer">Scénario illustratif. Onkora est un projet de démonstration : la société, les chiffres et le témoignage sont fictifs.</p>
+    </div>
+  </section>
+
+  <!-- ============ CONFORMITÉ ============ -->
+  <section class="compliance" id="compliance" aria-labelledby="comp-title">
+    <div class="shell comp-inner">
+      <h2 class="comp-title" id="comp-title" data-i18n="comp.title">Conçu pour un environnement réglementé</h2>
+      <ul class="comp-list">
+        <li class="reveal" data-i18n="comp.1">Conformité RGPD</li>
+        <li class="reveal" data-i18n="comp.2">Hébergement des données dans l'UE</li>
+        <li class="reveal" data-i18n="comp.3">Pistes d'audit exportables</li>
+        <li class="reveal" data-i18n="comp.4">Revue MLR intégrée au flux</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="shell shell-narrow">
+      <p class="eyebrow reveal" data-i18n="faq.kicker">FAQ</p>
+      <h2 class="section-title reveal" id="faq-title" data-i18n="faq.title">Questions fréquentes</h2>
+
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item reveal">
+          <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-p1" id="faq-b1">
+            <span data-i18n="faq.q1">Onkora remplace-t-il notre CRM ou notre plateforme d'emailing ?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button></h3>
+          <div class="faq-panel" id="faq-p1" role="region" aria-labelledby="faq-b1">
+            <div class="faq-panel-inner"><p data-i18n="faq.a1">Non. Onkora se place au-dessus des outils existants : il lit leurs données, calcule la séquence et renvoie les actions à exécuter dans chaque système. Le CRM reste le référentiel terrain, la plateforme email reste l'outil d'envoi.</p></div>
+          </div>
+        </div>
+        <div class="faq-item reveal">
+          <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-p2" id="faq-b2">
+            <span data-i18n="faq.q2">Combien de temps prend le déploiement initial ?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button></h3>
+          <div class="faq-panel" id="faq-p2" role="region" aria-labelledby="faq-b2">
+            <div class="faq-panel-inner"><p data-i18n="faq.a2">Comptez de six à dix semaines pour une première franchise : réconciliation du référentiel HCP, connexion des sources, puis un cycle pilote sur une cohorte restreinte avant généralisation.</p></div>
+          </div>
+        </div>
+        <div class="faq-item reveal">
+          <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-p3" id="faq-b3">
+            <span data-i18n="faq.q3">Comment la revue MLR s'articule-t-elle avec l'outil ?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button></h3>
+          <div class="faq-panel" id="faq-p3" role="region" aria-labelledby="faq-b3">
+            <div class="faq-panel-inner"><p data-i18n="faq.a3">Les contenus sont validés une fois sous forme de modules réutilisables, avec périmètre et date d'expiration. Une séquence ne peut mobiliser que des modules en cours de validité : la vérification est faite au moment de la composition, pas après.</p></div>
+          </div>
+        </div>
+        <div class="faq-item reveal">
+          <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-p4" id="faq-b4">
+            <span data-i18n="faq.q4">Où sont hébergées les données HCP ?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button></h3>
+          <div class="faq-panel" id="faq-p4" role="region" aria-labelledby="faq-b4">
+            <div class="faq-panel-inner"><p data-i18n="faq.a4">Dans l'Union européenne, avec chiffrement au repos et en transit, cloisonnement par pays et journalisation des accès. Les durées de conservation sont paramétrables par marché pour suivre vos règles locales.</p></div>
+          </div>
+        </div>
+        <div class="faq-item reveal">
+          <h3><button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-p5" id="faq-b5">
+            <span data-i18n="faq.q5">Les équipes médicales et marketing partagent-elles le même environnement ?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button></h3>
+          <div class="faq-panel" id="faq-p5" role="region" aria-labelledby="faq-b5">
+            <div class="faq-panel-inner"><p data-i18n="faq.a5">Elles partagent la vue de séquence, mais pas les mêmes droits. Le cloisonnement entre activités promotionnelles et médicales est appliqué par rôle, et toute interaction MSL reste séparée des contenus promotionnels.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DEMANDE DE DÉMO ============ -->
+  <section class="section section-alt" id="demo" aria-labelledby="demo-title">
+    <div class="shell demo-grid">
+
+      <div class="demo-intro">
+        <p class="eyebrow reveal" data-i18n="cta.kicker">Démo</p>
+        <h2 class="section-title reveal" id="demo-title" data-i18n="cta.title">Voir Onkora sur votre franchise.</h2>
+        <p class="section-lead reveal" data-i18n="cta.lead">Trente minutes, sur un cas réel de votre portefeuille : nous partons de vos canaux actuels et reconstruisons le plan de séquence devant vous.</p>
+        <ul class="demo-points reveal">
+          <li data-i18n="cta.p1">Aucune installation préalable</li>
+          <li data-i18n="cta.p2">Réponse sous un jour ouvré</li>
+          <li data-i18n="cta.p3">Sous NDA si nécessaire</li>
+        </ul>
+      </div>
+
+      <form class="demo-form reveal" id="demo-form" novalidate>
+        <div class="field">
+          <label for="f-name" data-i18n="form.name">Nom et prénom</label>
+          <input type="text" id="f-name" name="name" autocomplete="name" required
+                 aria-describedby="e-name" data-i18n-placeholder="form.name.ph" placeholder="Camille Rousseau">
+          <p class="field-error" id="e-name" role="alert"></p>
+        </div>
+        <div class="field">
+          <label for="f-email" data-i18n="form.email">E-mail professionnel</label>
+          <input type="email" id="f-email" name="email" autocomplete="email" required
+                 aria-describedby="e-email" data-i18n-placeholder="form.email.ph" placeholder="camille.rousseau@labo.com">
+          <p class="field-error" id="e-email" role="alert"></p>
+        </div>
+        <div class="field">
+          <label for="f-company" data-i18n="form.company">Société</label>
+          <input type="text" id="f-company" name="company" autocomplete="organization" required
+                 aria-describedby="e-company" data-i18n-placeholder="form.company.ph" placeholder="Nom du laboratoire">
+          <p class="field-error" id="e-company" role="alert"></p>
+        </div>
+        <div class="field">
+          <label for="f-role" data-i18n="form.role">Fonction</label>
+          <input type="text" id="f-role" name="role" autocomplete="organization-title" required
+                 aria-describedby="e-role" data-i18n-placeholder="form.role.ph" placeholder="Global Brand Manager">
+          <p class="field-error" id="e-role" role="alert"></p>
+        </div>
+        <div class="field field-wide">
+          <label for="f-message" data-i18n="form.message">Contexte (facultatif)</label>
+          <textarea id="f-message" name="message" rows="4"
+                    data-i18n-placeholder="form.message.ph" placeholder="Franchise concernée, marchés, canaux déjà en place."></textarea>
+        </div>
+        <div class="form-foot">
+          <button type="submit" class="btn btn-primary btn-block" id="submit-btn" data-i18n="form.submit">Demander une démo</button>
+          <p class="form-note" data-i18n="form.note">Vos coordonnées servent uniquement à organiser la démonstration.</p>
+        </div>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="shell footer-inner">
+
+    <div class="footer-brand">
+      <a class="brand" href="#top" data-i18n-aria="brand.aria" aria-label="Onkora — retour en haut de page">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+          <rect width="32" height="32" rx="4" fill="currentColor"/>
+          <path d="M8 10h16M8 16h16M8 22h16" stroke="var(--teal)" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="12" cy="10" r="3" fill="var(--ink)"/>
+          <circle cx="20" cy="16" r="3" fill="var(--ink)"/>
+          <circle cx="16" cy="22" r="3" fill="var(--red)"/>
+        </svg>
+        <span class="brand-name">Onkora</span>
+      </a>
+      <p class="footer-tag" data-i18n="footer.tag">Orchestration de campagnes omnicanales en oncologie.</p>
+    </div>
+
+    <nav class="footer-nav" aria-label="Navigation de pied de page" data-i18n-aria="footer.navaria">
+      <h2 class="footer-h" data-i18n="footer.h1">Plateforme</h2>
+      <ul>
+        <li><a href="#problem" data-i18n="nav.problem">Enjeux</a></li>
+        <li><a href="#platform" data-i18n="nav.platform">Plateforme</a></li>
+        <li><a href="#how" data-i18n="nav.how">Méthode</a></li>
+        <li><a href="#proof" data-i18n="nav.proof">Résultats</a></li>
+      </ul>
+    </nav>
+
+    <nav class="footer-nav" aria-label="Ressources" data-i18n-aria="footer.resaria">
+      <h2 class="footer-h" data-i18n="footer.h2">Ressources</h2>
+      <ul>
+        <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
+        <li><a href="#compliance" data-i18n="footer.compliance">Conformité</a></li>
+        <li><a href="#legal" data-i18n="footer.legal">Mentions légales</a></li>
+        <li><a href="#demo" data-i18n="nav.demo">Demander une démo</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer-legal" id="legal">
+      <h2 class="footer-h" data-i18n="footer.legal">Mentions légales</h2>
+      <p data-i18n="footer.legal1">Onkora est un projet de démonstration. La société, la plateforme, les métriques et le témoignage présentés sur cette page sont fictifs et ne décrivent aucun produit commercialisé.</p>
+      <p data-i18n="footer.legal2">Aucune donnée personnelle n'est collectée ni transmise depuis cette page tant qu'aucun point de collecte n'y est raccordé.</p>
+    </div>
+
+  </div>
+  <div class="shell footer-bottom">
+    <p data-i18n="footer.copy">© 2026 Onkora — projet de démonstration, société fictive.</p>
+    <a class="footer-top" href="#top" data-i18n="footer.backtop">Haut de page</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

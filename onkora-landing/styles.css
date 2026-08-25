@@ -1,0 +1,799 @@
+/* =========================================================================
+   ONKORA — Landing page
+   Concept de layout : « swimlane » (couloirs de séquence, filets hairline,
+   repères numériques en monospace, angles quasi droits).
+   ========================================================================= */
+
+/* ---------- 1. Tokens ---------------------------------------------------- */
+:root{
+  /* Palette */
+  --paper:#F3F5F2;      /* fond principal, blanc cassé froid */
+  --sage:#E6EAE5;       /* fond alterné / cartes */
+  --ink:#131C19;        /* texte, fonds sombres */
+  --graphite:#5C6864;   /* texte secondaire, filets */
+  --teal:#1E6F5C;       /* primaire interactif */
+  --red:#8C2F39;        /* accent rare, une seule idée : le signal */
+
+  --line:rgba(19,28,25,.14);
+  --line-strong:rgba(19,28,25,.26);
+
+  /* Typographie */
+  --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-body:"IBM Plex Sans","Segoe UI",Roboto,Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  /* Rythme */
+  --shell:1200px;
+  --gut:clamp(20px,5vw,48px);
+  --sec-y:clamp(64px,9vw,120px);
+  --header-h:72px;
+
+  --r:3px;                       /* rayon quasi droit, registre « document » */
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+/* ---------- 2. Base ------------------------------------------------------ */
+*,*::before,*::after{box-sizing:border-box}
+
+html{
+  -webkit-text-size-adjust:100%;
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-size:clamp(15px,.55vw + 13.6px,17px);
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+body.nav-open{overflow:hidden}
+
+h1,h2,h3{
+  font-family:var(--f-display);
+  font-weight:700;
+  line-height:1.14;
+  letter-spacing:-.018em;
+  margin:0;
+  text-wrap:balance;
+}
+
+p{margin:0}
+img,svg{max-width:100%}
+ul,ol{margin:0;padding:0;list-style:none}
+
+a{color:var(--teal);text-decoration-thickness:1px;text-underline-offset:3px}
+
+:focus-visible{
+  outline:2px solid var(--teal);
+  outline-offset:3px;
+  border-radius:2px;
+}
+
+::selection{background:var(--teal);color:var(--paper)}
+
+.shell{
+  width:100%;
+  max-width:var(--shell);
+  margin-inline:auto;
+  padding-inline:var(--gut);
+}
+.shell-narrow{max-width:840px}
+
+.skip-link{
+  position:absolute;
+  left:12px;top:-100px;
+  z-index:120;
+  background:var(--ink);color:var(--paper);
+  padding:10px 16px;border-radius:var(--r);
+  font-size:.9rem;text-decoration:none;
+  transition:transform .2s var(--ease);
+}
+.skip-link:focus{top:12px}
+
+/* Décalage d'ancre : compense le header sticky */
+[id]{scroll-margin-top:calc(var(--header-h) + 24px)}
+
+/* ---------- 3. Typographie utilitaire ------------------------------------ */
+.eyebrow{
+  font-family:var(--f-mono);
+  font-size:.72rem;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--teal);
+  margin-bottom:18px;
+}
+
+.section-title{font-size:clamp(1.6rem,3.1vw,2.55rem);max-width:19ch}
+#platform .section-title,#problem .section-title{max-width:24ch}
+
+.section-lead{
+  margin-top:18px;
+  max-width:60ch;
+  color:var(--graphite);
+  font-size:clamp(1rem,.5vw + .88rem,1.13rem);
+}
+
+/* ---------- 4. Boutons --------------------------------------------------- */
+.btn{
+  --btn-bg:var(--teal);
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:8px;
+  padding:14px 24px;
+  border:1px solid transparent;
+  border-radius:var(--r);
+  font-family:var(--f-body);
+  font-size:.95rem;font-weight:500;
+  line-height:1.2;
+  text-decoration:none;
+  cursor:pointer;
+  transition:transform .18s var(--ease),background-color .18s var(--ease),
+             color .18s var(--ease),border-color .18s var(--ease);
+}
+.btn-primary{background:var(--btn-bg);color:var(--paper)}
+.btn-primary:hover{--btn-bg:#175647;transform:translateY(-2px)}
+.btn-primary:active{transform:translateY(0)}
+
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line-strong)}
+.btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+.btn-ghost:active{transform:translateY(0)}
+
+.btn-sm{padding:10px 16px;font-size:.88rem}
+.btn-block{width:100%}
+
+/* ---------- 5. Header ---------------------------------------------------- */
+.site-header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(243,245,242,.88);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid transparent;
+  transition:border-color .25s var(--ease),background-color .25s var(--ease);
+}
+.site-header.is-compact{
+  border-bottom-color:var(--line);
+  background:rgba(243,245,242,.95);
+}
+
+.header-inner{
+  display:flex;align-items:center;gap:20px;
+  min-height:var(--header-h);
+  padding-block:16px;
+  transition:padding-block .25s var(--ease);
+}
+.site-header.is-compact .header-inner{padding-block:8px}
+
+.brand{
+  display:inline-flex;align-items:center;gap:10px;
+  color:var(--ink);text-decoration:none;
+  font-family:var(--f-display);font-weight:700;
+  letter-spacing:-.02em;font-size:1.14rem;
+  flex:0 0 auto;
+}
+.brand-mark{width:28px;height:28px;flex:0 0 auto}
+.brand-name{line-height:1}
+
+.nav-panel{margin-left:auto}
+.nav-list{display:flex;align-items:center;gap:clamp(14px,1.8vw,30px)}
+.nav-list a{
+  position:relative;
+  color:var(--ink);
+  text-decoration:none;
+  font-size:.93rem;
+  padding-block:6px;
+  display:inline-block;
+}
+/* Micro-interaction nav : filet qui se déploie (scaleX, aucun reflow) */
+.nav-list a::after{
+  content:"";
+  position:absolute;left:0;right:0;bottom:0;
+  height:1.5px;background:var(--teal);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .22s var(--ease);
+}
+.nav-list a:hover::after,.nav-list a:focus-visible::after{transform:scaleX(1)}
+.nav-cta{display:none}
+
+.header-actions{display:flex;align-items:center;gap:14px;flex:0 0 auto}
+
+.lang-switch{display:inline-flex;align-items:center;gap:6px}
+.lang-btn{
+  appearance:none;background:none;border:0;
+  font-family:var(--f-mono);font-size:.8rem;font-weight:500;
+  letter-spacing:.06em;
+  color:var(--graphite);
+  padding:6px 4px;cursor:pointer;
+  transition:color .18s var(--ease);
+}
+.lang-btn:hover{color:var(--ink)}
+.lang-btn.is-active{color:var(--ink);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
+.lang-sep{width:1px;height:12px;background:var(--line-strong)}
+
+.burger{
+  display:none;
+  width:40px;height:40px;
+  align-items:center;justify-content:center;
+  flex-direction:column;gap:5px;
+  background:none;border:1px solid var(--line-strong);border-radius:var(--r);
+  cursor:pointer;
+}
+.burger-bar{
+  display:block;width:16px;height:1.5px;background:var(--ink);
+  transition:transform .24s var(--ease),opacity .2s var(--ease);
+}
+.burger[aria-expanded="true"] .burger-bar:first-child{transform:translateY(3.25px) rotate(45deg)}
+.burger[aria-expanded="true"] .burger-bar:last-child{transform:translateY(-3.25px) rotate(-45deg)}
+
+.nav-scrim{
+  position:fixed;inset:0;z-index:90;
+  background:rgba(19,28,25,.42);
+  opacity:0;transition:opacity .26s var(--ease);
+}
+.nav-scrim.is-on{opacity:1}
+
+/* ---------- 6. Hero ------------------------------------------------------ */
+.hero{
+  padding-block:clamp(48px,7vw,88px) clamp(56px,8vw,104px);
+  border-bottom:1px solid var(--line);
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);
+  gap:clamp(32px,5vw,64px);
+  align-items:center;
+}
+.hero-title{font-size:clamp(1.95rem,3.7vw,3.05rem);max-width:17ch}
+.hero-title em{display:block;font-style:normal;color:var(--teal)}
+.hero-sub{
+  margin-top:22px;max-width:52ch;
+  color:var(--graphite);
+  font-size:clamp(1.02rem,.6vw + .9rem,1.19rem);
+}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+
+.hero-meta{
+  display:flex;flex-wrap:wrap;gap:10px 22px;
+  margin-top:32px;padding-top:20px;
+  border-top:1px solid var(--line);
+  font-family:var(--f-mono);font-size:.76rem;
+  letter-spacing:.04em;color:var(--graphite);
+}
+.hero-meta li{display:flex;align-items:center;gap:8px}
+.hero-meta li::before{
+  content:"";width:5px;height:5px;background:var(--teal);flex:0 0 auto;
+}
+
+/* ---------- 7. Élément signature : diagramme d'orchestration ------------- */
+.diagram-frame{
+  margin:0;
+  padding:clamp(12px,2vw,20px);
+  background:var(--sage);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+}
+.diagram{display:block;width:100%;height:auto}
+
+.dia-axis text{
+  font-family:var(--f-mono);font-size:12px;
+  fill:var(--graphite);text-anchor:middle;letter-spacing:.05em;
+}
+.dia-axis path{stroke:var(--line-strong);stroke-width:1;fill:none}
+.dia-guide{stroke:var(--line);stroke-dasharray:2 5}
+
+.dia-label{
+  font-family:var(--f-mono);font-size:12.5px;
+  fill:var(--graphite);text-anchor:end;letter-spacing:.02em;
+}
+.dia-lane{stroke:var(--line-strong);stroke-width:1;fill:none}
+.dia-converge path{stroke:var(--line-strong);stroke-width:1;fill:none;opacity:.55}
+
+.pulse{fill:var(--teal)}
+.dia-outline{stroke:var(--teal);stroke-width:1.5;fill:none}
+.out-pulse{fill:var(--red)}
+
+.gate-box{fill:var(--paper);stroke:var(--ink);stroke-width:1.5}
+.gate-check{stroke:var(--teal);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.dia-gatelabel{
+  font-family:var(--f-mono);font-size:11.5px;fill:var(--ink);
+  text-anchor:middle;letter-spacing:.06em;text-transform:uppercase;
+}
+.dia-node{fill:var(--ink)}
+.dia-nodelabel{
+  font-family:var(--f-mono);font-size:12px;font-weight:500;
+  fill:var(--paper);text-anchor:middle;letter-spacing:.06em;
+}
+.diagram-caption{
+  margin-top:14px;
+  font-family:var(--f-mono);font-size:.72rem;
+  letter-spacing:.03em;color:var(--graphite);
+}
+
+/* Animations du diagramme — transform/opacity uniquement */
+@keyframes lane-run{
+  0%{transform:translateX(0);opacity:0}
+  8%{opacity:1}
+  62%{transform:translateX(268px);opacity:1}
+  74%{transform:translateX(268px);opacity:0}
+  100%{transform:translateX(268px);opacity:0}
+}
+@keyframes out-run{
+  0%,42%{transform:translateX(0) scale(.4);opacity:0}
+  52%{transform:translateX(0) scale(1);opacity:1}
+  86%{transform:translateX(80px) scale(1);opacity:1}
+  96%,100%{transform:translateX(80px) scale(.4);opacity:0}
+}
+@keyframes gate-blink{
+  0%,44%{opacity:.25}
+  54%,78%{opacity:1}
+  92%,100%{opacity:.25}
+}
+.pulse{animation:lane-run 4.6s var(--ease) infinite;animation-delay:var(--d,0s)}
+.out-pulse{animation:out-run 4.6s var(--ease) infinite}
+.gate-check{animation:gate-blink 4.6s var(--ease) infinite}
+
+/* ---------- 8. Sections génériques --------------------------------------- */
+.section{padding-block:var(--sec-y)}
+.section-alt{background:var(--sage);border-block:1px solid var(--line)}
+
+/* ---------- 9. Problème -------------------------------------------------- */
+.prob-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(258px,1fr));
+  gap:1px;
+  margin-top:clamp(40px,5vw,64px);
+  background:var(--line);
+  border:1px solid var(--line);
+}
+.prob-item{
+  background:var(--sage);
+  padding:clamp(24px,3vw,34px);
+  transition:background-color .22s var(--ease);
+}
+.prob-item:hover{background:var(--paper)}
+.prob-num{
+  display:block;
+  font-family:var(--f-mono);font-size:.76rem;font-weight:500;
+  letter-spacing:.14em;color:var(--red);margin-bottom:16px;
+}
+.prob-item h3{font-size:1.16rem;margin-bottom:12px}
+.prob-item p{color:var(--graphite);font-size:.96rem}
+
+/* ---------- 10. Plateforme ----------------------------------------------- */
+.feat-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(288px,1fr));
+  gap:clamp(16px,2vw,24px);
+  margin-top:clamp(40px,5vw,64px);
+}
+.feat-card{
+  position:relative;
+  padding:clamp(24px,2.6vw,32px);
+  background:var(--sage);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  transition:transform .24s var(--ease),border-color .24s var(--ease);
+}
+.feat-card::before{ /* filet de couloir : marque la famille visuelle */
+  content:"";
+  position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:var(--teal);
+  transform:scaleY(0);transform-origin:top;
+  transition:transform .3s var(--ease);
+}
+.feat-card:hover{transform:translateY(-3px);border-color:var(--line-strong)}
+.feat-card:hover::before{transform:scaleY(1)}
+.feat-idx{
+  display:block;
+  font-family:var(--f-mono);font-size:.74rem;font-weight:500;
+  letter-spacing:.14em;color:var(--teal);margin-bottom:16px;
+}
+.feat-card h3{font-size:1.1rem;margin-bottom:10px}
+.feat-card p{color:var(--graphite);font-size:.94rem}
+
+/* ---------- 11. Méthode -------------------------------------------------- */
+.how-steps{
+  margin-top:clamp(40px,5vw,64px);
+  display:grid;gap:0;
+}
+.how-step{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  gap:clamp(20px,3vw,36px);
+  padding-block:clamp(26px,3vw,38px);
+  border-top:1px solid var(--line);
+}
+.how-step:last-child{border-bottom:1px solid var(--line)}
+.how-num{
+  font-family:var(--f-mono);font-size:clamp(1.7rem,3vw,2.5rem);
+  font-weight:400;line-height:1;color:var(--teal);
+  min-width:clamp(44px,5vw,72px);
+}
+.how-step h3{font-size:1.24rem;margin-bottom:10px}
+.how-step p{color:var(--graphite);max-width:62ch}
+
+/* ---------- 12. Preuve --------------------------------------------------- */
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(196px,1fr));
+  gap:1px;
+  margin:clamp(40px,5vw,64px) 0 0;
+  background:var(--line);
+  border:1px solid var(--line);
+}
+.metric{background:var(--paper);padding:clamp(24px,3vw,32px)}
+.metric-val{
+  font-family:var(--f-display);font-weight:700;
+  font-size:clamp(2rem,3.6vw,2.9rem);
+  line-height:1;letter-spacing:-.03em;
+  color:var(--ink);
+  font-variant-numeric:tabular-nums;
+}
+.metric-label{
+  margin:14px 0 0;
+  color:var(--graphite);font-size:.88rem;line-height:1.5;
+}
+
+.quote{
+  margin:clamp(40px,5vw,64px) 0 0;
+  padding:clamp(28px,3.4vw,44px);
+  background:var(--ink);color:var(--paper);
+  border-radius:var(--r);
+  position:relative;
+}
+.quote::before{
+  content:"";
+  position:absolute;left:0;top:clamp(28px,3.4vw,44px);bottom:clamp(28px,3.4vw,44px);
+  width:2px;background:var(--red);
+}
+.quote blockquote{margin:0}
+.quote p{
+  font-family:var(--f-display);font-weight:600;
+  font-size:clamp(1.08rem,1.7vw,1.42rem);
+  line-height:1.42;letter-spacing:-.012em;
+  max-width:48ch;
+}
+.quote figcaption{
+  margin-top:24px;padding-top:18px;
+  border-top:1px solid rgba(243,245,242,.2);
+  display:flex;flex-direction:column;gap:3px;
+}
+.quote-name{font-family:var(--f-mono);font-size:.86rem;letter-spacing:.04em}
+.quote-role{font-size:.84rem;color:rgba(243,245,242,.72)}
+
+.disclaimer{
+  margin-top:18px;
+  font-family:var(--f-mono);font-size:.72rem;
+  letter-spacing:.03em;color:var(--graphite);
+}
+
+/* ---------- 13. Conformité ----------------------------------------------- */
+.compliance{
+  background:var(--ink);color:var(--paper);
+  padding-block:clamp(36px,4.4vw,56px);
+}
+.comp-inner{
+  display:flex;flex-wrap:wrap;align-items:center;
+  gap:clamp(20px,3vw,48px);
+}
+.comp-title{
+  font-size:1.06rem;font-weight:600;
+  letter-spacing:-.01em;
+  flex:0 0 auto;max-width:22ch;
+}
+.comp-list{
+  display:flex;flex-wrap:wrap;gap:12px 28px;
+  margin-left:auto;
+}
+.comp-list li{
+  display:flex;align-items:center;gap:9px;
+  font-family:var(--f-mono);font-size:.78rem;
+  letter-spacing:.03em;color:rgba(243,245,242,.86);
+}
+.comp-list li::before{
+  content:"";width:5px;height:5px;background:var(--teal);flex:0 0 auto;
+}
+
+/* ---------- 14. FAQ ------------------------------------------------------ */
+.faq-list{margin-top:clamp(36px,4.4vw,56px);border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item h3{margin:0;font-size:inherit;letter-spacing:normal}
+
+.faq-q{
+  width:100%;
+  display:flex;align-items:flex-start;justify-content:space-between;gap:20px;
+  padding:22px 0;
+  background:none;border:0;
+  font-family:var(--f-display);font-weight:600;
+  font-size:clamp(1rem,1.1vw,1.09rem);
+  line-height:1.36;letter-spacing:-.012em;
+  color:var(--ink);text-align:left;
+  cursor:pointer;
+  transition:color .18s var(--ease);
+}
+.faq-q:hover{color:var(--teal)}
+
+.faq-icon{
+  position:relative;
+  width:14px;height:14px;flex:0 0 auto;margin-top:5px;
+}
+.faq-icon::before,.faq-icon::after{
+  content:"";position:absolute;left:0;top:50%;
+  width:14px;height:1.5px;background:currentColor;
+}
+.faq-icon::after{
+  transform:rotate(90deg);
+  transition:transform .28s var(--ease);
+}
+.faq-q[aria-expanded="true"] .faq-icon::after{transform:rotate(0deg)}
+
+/* Ouverture fluide : interpolation de la ligne de grille (hauteur auto),
+   le contenu lui-même est animé en transform/opacity. */
+.faq-panel{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows .32s var(--ease);
+}
+.faq-panel>.faq-panel-inner{
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(-6px);
+  transition:opacity .28s var(--ease),transform .28s var(--ease);
+}
+.faq-item.is-open>.faq-panel{grid-template-rows:1fr}
+.faq-item.is-open>.faq-panel>.faq-panel-inner{opacity:1;transform:translateY(0)}
+.faq-panel-inner p{
+  padding-bottom:24px;padding-right:34px;
+  color:var(--graphite);font-size:.96rem;max-width:70ch;
+}
+
+/* ---------- 15. Démo / formulaire ---------------------------------------- */
+.demo-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.06fr);
+  gap:clamp(36px,5vw,72px);
+  align-items:start;
+}
+.demo-points{
+  margin-top:28px;
+  display:flex;flex-direction:column;gap:10px;
+  font-family:var(--f-mono);font-size:.78rem;
+  letter-spacing:.03em;color:var(--graphite);
+}
+.demo-points li{display:flex;align-items:center;gap:9px}
+.demo-points li::before{content:"";width:5px;height:5px;background:var(--teal);flex:0 0 auto}
+
+.demo-form{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+  padding:clamp(24px,3vw,36px);
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+}
+.field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.field-wide,.form-foot,.form-status{grid-column:1/-1}
+
+.field label{
+  font-family:var(--f-mono);font-size:.72rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);
+}
+.field input,.field textarea{
+  width:100%;
+  padding:12px 14px;
+  font-family:var(--f-body);font-size:.95rem;
+  color:var(--ink);background:var(--paper);
+  border:1px solid var(--line-strong);
+  border-radius:var(--r);
+  transition:border-color .18s var(--ease),box-shadow .18s var(--ease);
+}
+.field textarea{resize:vertical;min-height:104px}
+.field input::placeholder,.field textarea::placeholder{color:rgba(92,104,100,.7)}
+.field input:hover,.field textarea:hover{border-color:var(--graphite)}
+.field input:focus,.field textarea:focus{
+  outline:none;
+  border-color:var(--teal);
+  box-shadow:0 0 0 3px rgba(30,111,92,.16);
+}
+.field.has-error input,.field.has-error textarea{border-color:var(--red)}
+.field.has-error input:focus,.field.has-error textarea:focus{box-shadow:0 0 0 3px rgba(140,47,57,.16)}
+
+.field-error{
+  min-height:0;
+  font-size:.8rem;color:var(--red);
+}
+.field-error:empty{display:none}
+
+.form-foot{display:flex;flex-direction:column;gap:12px;margin-top:4px}
+.form-note{font-size:.78rem;color:var(--graphite)}
+
+.form-status{
+  margin-top:4px;padding:14px 16px;
+  border-radius:var(--r);font-size:.9rem;
+  display:none;
+}
+.form-status.is-ok{display:block;background:rgba(30,111,92,.1);border:1px solid var(--teal);color:#12503F}
+.form-status.is-ko{display:block;background:rgba(140,47,57,.09);border:1px solid var(--red);color:var(--red)}
+.form-status strong{display:block;font-family:var(--f-display);margin-bottom:3px}
+
+button[disabled]{opacity:.62;cursor:progress}
+
+/* ---------- 16. Footer --------------------------------------------------- */
+.site-footer{background:var(--ink);color:var(--paper);padding-top:clamp(48px,6vw,80px)}
+.site-footer .brand{color:var(--paper)}
+.site-footer a{color:rgba(243,245,242,.78);text-decoration:none;transition:color .18s var(--ease)}
+.site-footer a:hover{color:var(--paper);text-decoration:underline;text-underline-offset:3px}
+
+.footer-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1.5fr) repeat(2,minmax(0,.8fr)) minmax(0,1.5fr);
+  gap:clamp(28px,3.4vw,48px);
+  padding-bottom:clamp(40px,5vw,64px);
+}
+.footer-tag{margin-top:14px;color:rgba(243,245,242,.66);font-size:.9rem;max-width:30ch}
+.footer-h{
+  font-family:var(--f-mono);font-size:.72rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(243,245,242,.55);
+  margin:0 0 16px;
+}
+.footer-nav ul{display:flex;flex-direction:column;gap:10px;font-size:.92rem}
+.footer-legal p{color:rgba(243,245,242,.6);font-size:.82rem;margin-bottom:10px;max-width:44ch}
+
+.footer-bottom{
+  display:flex;flex-wrap:wrap;gap:12px 24px;
+  align-items:center;justify-content:space-between;
+  padding-block:22px;
+  border-top:1px solid rgba(243,245,242,.16);
+  font-family:var(--f-mono);font-size:.74rem;
+  letter-spacing:.03em;color:rgba(243,245,242,.6);
+}
+
+/* ---------- 17. Animations d'entrée -------------------------------------- */
+.hero-anim{
+  opacity:0;
+  transform:translateY(14px);
+  animation:hero-in .72s var(--ease) forwards;
+  animation-delay:calc(var(--step,1) * .11s + .06s);
+}
+.hero-anim[data-anim="1"]{--step:1}
+.hero-anim[data-anim="2"]{--step:2}
+.hero-anim[data-anim="3"]{--step:3}
+.hero-anim[data-anim="4"]{--step:4}
+.hero-anim[data-anim="5"]{--step:5}
+@keyframes hero-in{to{opacity:1;transform:translateY(0)}}
+
+.reveal{
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity .62s var(--ease),transform .62s var(--ease);
+}
+.reveal.is-in{opacity:1;transform:none}
+/* Décalage en cascade à l'intérieur d'un même groupe */
+.prob-item:nth-child(2),.feat-card:nth-child(2),.how-step:nth-child(2),.comp-list li:nth-child(2),.faq-item:nth-child(2){transition-delay:.07s}
+.prob-item:nth-child(3),.feat-card:nth-child(3),.how-step:nth-child(3),.comp-list li:nth-child(3),.faq-item:nth-child(3){transition-delay:.14s}
+.feat-card:nth-child(4),.comp-list li:nth-child(4),.faq-item:nth-child(4){transition-delay:.21s}
+.feat-card:nth-child(5),.faq-item:nth-child(5){transition-delay:.28s}
+.feat-card:nth-child(6){transition-delay:.35s}
+
+/* Transition de langue */
+.lang-fade [data-i18n],.lang-fade [data-i18n-placeholder]{
+  opacity:.28;
+  transition:opacity .16s var(--ease);
+}
+
+/* ---------- 18. Responsive ----------------------------------------------- */
+@media (max-width:1000px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-title,.hero-sub{max-width:34ch}
+  .hero-sub{max-width:56ch}
+  .demo-grid{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .comp-list{margin-left:0}
+}
+
+@media (max-width:820px){
+  :root{--header-h:64px}
+
+  .burger{display:inline-flex}
+  .header-cta{display:none}
+  /* Le panneau off-canvas n'est monté que pendant l'ouverture : un élément
+     `position:fixed` translaté hors écran n'est pas clippé par `overflow-x`
+     du body et étendrait la zone de défilement horizontale. */
+  .nav-panel{display:none}
+  .nav-panel.is-mounted{
+    position:fixed;
+    top:0;right:0;bottom:0;
+    width:min(84vw,340px);
+    z-index:95;
+    margin-left:0;
+    padding:calc(var(--header-h) + 28px) 28px 32px;
+    background:var(--paper);
+    border-left:1px solid var(--line);
+    display:flex;flex-direction:column;gap:8px;
+    transform:translateX(100%);
+    transition:transform .3s var(--ease);
+    overflow-y:auto;
+  }
+  .nav-panel.is-mounted.is-open{transform:translateX(0)}
+  .nav-list{flex-direction:column;align-items:stretch;gap:2px}
+  .nav-list a{
+    display:block;
+    padding:14px 0;
+    font-size:1.05rem;
+    border-bottom:1px solid var(--line);
+  }
+  .nav-list a::after{display:none}
+  .nav-cta{display:inline-flex;margin-top:24px}
+}
+
+@media (max-width:640px){
+  .demo-form{grid-template-columns:1fr}
+  .how-step{grid-template-columns:1fr;gap:10px}
+  .how-num{min-width:0}
+  .footer-inner{grid-template-columns:1fr}
+  .footer-bottom{justify-content:flex-start}
+  /* Diagramme réduit : on remonte la taille des libellés en unités SVG pour
+     qu'ils restent lisibles une fois le viewBox mis à l'échelle. La gouttière
+     de gauche ne suffit alors plus — les libellés passent au-dessus de leur
+     couloir, où la largeur disponible n'est plus contrainte. */
+  .dia-label{
+    font-size:17px;
+    text-anchor:start;
+    transform:translate(12px,-13px);
+  }
+  .dia-guide{display:none}
+  .dia-axis text{font-size:16px}
+  .dia-gatelabel{font-size:15px}
+  .dia-nodelabel{font-size:15px}
+}
+
+@media (max-width:400px){
+  .hero-actions .btn{width:100%}
+  .dia-label{font-size:19px}
+}
+
+@media (min-width:1600px){
+  :root{--shell:1320px}
+}
+
+/* ---------- 19. Mouvement réduit ----------------------------------------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+
+  /* Le contenu doit être visible immédiatement, sans état d'attente */
+  .hero-anim{opacity:1;transform:none;animation:none}
+  .reveal{opacity:1;transform:none;transition:none}
+  .lang-fade [data-i18n],.lang-fade [data-i18n-placeholder]{opacity:1}
+
+  /* Diagramme : état figé lisible. Les impulsions sont décalées en escalier
+     pour que le schéma se lise encore comme une séquence, et non comme une
+     colonne de points alignés. */
+  .pulse{animation:none}
+  .pulse:nth-of-type(1){transform:translateX(96px)}
+  .pulse:nth-of-type(2){transform:translateX(140px)}
+  .pulse:nth-of-type(3){transform:translateX(184px)}
+  .pulse:nth-of-type(4){transform:translateX(228px)}
+  .pulse:nth-of-type(5){transform:translateX(268px)}
+  .out-pulse{animation:none;transform:translateX(52px)}
+  .gate-check{animation:none;opacity:1}
+}
+
+/* ---------- 20. Impression ----------------------------------------------- */
+@media print{
+  .site-header,.nav-scrim,.hero-actions,.demo-form,.footer-top{display:none}
+  body{background:#fff;color:#000}
+  .reveal,.hero-anim{opacity:1;transform:none;animation:none}
+}
